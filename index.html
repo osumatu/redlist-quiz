@@ -122,31 +122,76 @@
     `;
   }
 
+  let totalQuestionsAnswered = 0;
+  let correctAnswers = 0;
+
+  async function checkQuestionCount() {
+    totalQuestionsAnswered++;
+
+    if (totalQuestionsAnswered % 10 === 0) {
+      const successRate = ((correctAnswers / totalQuestionsAnswered) * 100).toFixed(2);
+
+      let title = '';
+
+      if (successRate >= 80) {
+        title = 'MIT goreve cagiriyor!';
+      } else if (successRate >= 60) {
+        title = 'Yuru be babus!';
+      } else if (successRate >= 40) {
+        title = 'Ha gayret.';
+      } else {
+        title = 'Hocam goz var izan var ya.';
+      }
+
+      Swal.fire({
+        title: title,
+        text: `%${successRate} oranla dogru bildin. Devam mi bastan mi?`,
+        showCancelButton: true,
+        confirmButtonText: 'Devam',
+        cancelButtonText: 'Bastan',
+        icon: 'info'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          displayQuiz();
+        } else {
+          correctScore = 0;
+          incorrectScore = 0;
+          totalQuestionsAnswered = 0;
+          correctAnswers = 0;
+          updateScoreboard();
+          displayQuiz();
+        }
+      });
+    } else {
+      displayQuiz();
+    }
+  }
+
+
   function checkAnswer(correctAnswer, selectedAnswer) {
     if (selectedAnswer === correctAnswer) {
       Swal.fire({
         icon: 'success',
         text: 'Bravo!',
-        confirmButtonText: 'Devam',
+        confirmButtonText: 'Continue',
       }).then((result) => {
         if (result.isConfirmed) {
+          correctAnswers++;
           correctScore++;
-
           updateScoreboard();
-          displayQuiz();
+          checkQuestionCount();
         }
       });
     } else {
       Swal.fire({
         icon: 'error',
         text: `Maalesef. ${correctAnswer} olacakti.`,
-        confirmButtonText: 'Devam',
+        confirmButtonText: 'Continue',
       }).then((result) => {
         if (result.isConfirmed) {
           incorrectScore++;
-
           updateScoreboard();
-          displayQuiz();
+          checkQuestionCount();
         }
       });
     }
@@ -156,7 +201,6 @@
     const scoreboard = document.getElementById('scoreboard');
     scoreboard.textContent = `Dogru: ${correctScore} | Yanlis: ${incorrectScore}`;
 
-    // Store the scores in localStorage
     localStorage.setItem('correctScore', correctScore);
     localStorage.setItem('incorrectScore', incorrectScore);
   }
