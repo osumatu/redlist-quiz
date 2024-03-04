@@ -11,11 +11,11 @@
             margin: 0;
             padding: 0;
         }
-
         .container {
+            max-width: 600px;
+            margin: 0 auto;
             padding: 20px;
         }
-
         .image-container {
             display: flex;
             justify-content: center;
@@ -23,27 +23,19 @@
             margin-bottom: 20px;
             height: 300px; /* Set a fixed height */
         }
-
         img {
             max-width: 100%;
             max-height: 100%;
         }
-
         .answer-button {
             margin: 5px;
             padding: 10px 20px;
             font-size: 16px;
             cursor: pointer;
         }
-
-        @media (max-width: 600px) {
-            .container {
-                padding: 10px;
-            }
-
-            .image-container {
-                height: auto;
-            }
+        .scoreboard {
+            margin-top: 20px;
+            font-size: 18px;
         }
     </style>
 </head>
@@ -51,9 +43,13 @@
 <div class="container">
     <h1>Terorist Quiz</h1>
     <div id="quiz-container"></div>
+    <div id="scoreboard" class="scoreboard">Dogru: 0 | Yanlis: 0</div>
 </div>
 
 <script>
+    let correctScore = 0;
+    let incorrectScore = 0;
+
     async function fetchTerroristData() {
         try {
             const response = await fetch('https://raw.githubusercontent.com/osumatu/terorist-quiz/main/data.json');
@@ -83,12 +79,14 @@
         if (indexToRemove !== -1) {
             uniqueTerroristNames.splice(indexToRemove, 1);
         }
+
         const incorrectAnswers = [];
         for (let i = 0; i < 3; i++) {
             const randomIndex = Math.floor(Math.random() * uniqueTerroristNames.length);
             incorrectAnswers.push(uniqueTerroristNames[randomIndex]);
             uniqueTerroristNames.splice(randomIndex, 1);
         }
+
         const allAnswers = [correctAnswer, ...incorrectAnswers].sort(() => Math.random() - 0.5);
         const quizContainer = document.getElementById('quiz-container');
         quizContainer.innerHTML = `
@@ -103,10 +101,18 @@
     function checkAnswer(correctAnswer, selectedAnswer) {
         if (selectedAnswer === correctAnswer) {
             alert('Bravo!');
+            correctScore++;
         } else {
             alert('Malesef. ' + correctAnswer + " olacakti.");
+            incorrectScore++;
         }
+        updateScoreboard();
         displayQuiz();
+    }
+
+    function updateScoreboard() {
+        const scoreboard = document.getElementById('scoreboard');
+        scoreboard.textContent = `Dogru: ${correctScore} | Yanlis: ${incorrectScore}`;
     }
 
     window.onload = displayQuiz;
