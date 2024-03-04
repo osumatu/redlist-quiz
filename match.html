@@ -18,6 +18,14 @@
       padding: 20px;
     }
 
+    @media screen and (min-width: 768px) {
+      .container {
+        max-width: 760px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+    }
+
     .image-container {
       display: flex;
       justify-content: center;
@@ -30,22 +38,25 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: space-evenly;
+      gap: 4px;
     }
 
     .options {
       display: flex;
       justify-content: center;
-      margin-bottom: 21.44px;
-      height: 30.5px;
+      flex-wrap: wrap;
+      margin-bottom: 17.44px;
     }
 
     .options .droppable {
       margin-right: 4px;
+      margin-bottom: 4px;
     }
 
     .options .droppable:not(.draggable-dropzone--occupied) {
       min-width: 60px;
       border: 2px dashed black;
+      height: 26.5px;
     }
 
     .options .answer-draggable {
@@ -62,8 +73,18 @@
     }
 
     .person {
-      flex: 0 0 225px;
-      margin-bottom: 4px;
+      flex: 0 0 47%;
+    }
+
+    @media screen and (min-width: 768px) {
+      .person {
+        flex: 0 0 24%;
+      }
+    }
+
+    .person img {
+      width: 100%;
+      aspect-ratio: 3 / 4;
     }
 
     .person .droppable {
@@ -73,11 +94,6 @@
       border: 2px dashed black;
       width: 100%;
       height: 40px;
-    }
-
-    img {
-      width: 225px;
-      height: 300px;
     }
 
     .answer-button {
@@ -100,6 +116,7 @@
 <body>
   <div class="container">
     <h1>Terorist - Orgut Eslestir</h1>
+    <p>Asagidaki orgutleri surukleyip birakarak gorsellerle eslestir.</p>
     <div id="quiz-container"></div>
   </div>
 
@@ -161,6 +178,9 @@
           </div>`;
         }).join('')}
       </div>`;
+
+      const optionsElement = document.querySelector('.options');
+      optionsElement.style.height = `${optionsElement.clientHeight}px`;
 
       const droppable = new Droppable(document.querySelectorAll('#quiz-container'), {
         draggable: '.answer-draggable',
