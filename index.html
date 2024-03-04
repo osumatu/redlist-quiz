@@ -1,123 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terorist Quiz</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        .image-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 20px;
-            height: 300px; /* Set a fixed height */
-        }
-        img {
-            max-width: 100%;
-            max-height: 100%;
-        }
-        .answer-button {
-            margin: 5px;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        .scoreboard {
-            margin-top: 20px;
-            font-size: 18px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terorist Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
 
-    <script defer src="https://analytics.eu.umami.is/script.js" data-website-id="c21f2db2-88e9-4f47-931e-106a38134e74"></script>
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .image-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+      height: 300px; /* Set a fixed height */
+    }
+
+    img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+
+    .answer-button {
+      margin: 5px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .scoreboard {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+  </style>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script defer src="https://analytics.eu.umami.is/script.js" data-website-id="c21f2db2-88e9-4f47-931e-106a38134e74"></script>
 </head>
 <body>
-<div class="container">
+  <div class="container">
     <h1>Terorist Quiz</h1>
     <div id="quiz-container"></div>
     <div id="scoreboard" class="scoreboard">Dogru: 0 | Yanlis: 0</div>
-</div>
+  </div>
 
 <script>
-    let correctScore = 0;
-    let incorrectScore = 0;
+  let correctScore = 0;
+  let incorrectScore = 0;
 
-    async function fetchTerroristData() {
-        try {
-            const response = await fetch('https://raw.githubusercontent.com/osumatu/terorist-quiz/main/data.json');
-            if (!response.ok) {
-                throw new Error('Failed to fetch data');
-            }
-            const data = await response.json();
-            return data.filter((terrorist) => !!terrorist.GorselURL?.length);
-        } catch (error) {
-            console.error('Error fetching data:', error);
-            return [];
-        }
+  async function fetchTerroristData() {
+    try {
+      const response = await fetch('https://raw.githubusercontent.com/osumatu/terorist-quiz/main/data.json');
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch data');
+      }
+
+      const data = await response.json();
+      return data.filter((terrorist) => !!terrorist.GorselURL?.length);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+
+      return [];
+    }
+  }
+
+  async function displayQuiz() {
+    const terroristData = await fetchTerroristData();
+
+    if (terroristData.length === 0) {
+      alert('Failed to fetch data. Please try again later.');
+
+      return;
     }
 
-    async function displayQuiz() {
-        const terroristData = await fetchTerroristData();
-        if (terroristData.length === 0) {
-            alert('Failed to fetch data. Please try again later.');
-            return;
-        }
+    const randomIndex = Math.floor(Math.random() * terroristData.length);
+    const currentTerrorist = terroristData[randomIndex];
+    const correctAnswer = currentTerrorist.TOrgutAdi;
+    const uniqueTerroristNames = Array.from(new Set(terroristData.map(data => data.TOrgutAdi)));
+    const indexToRemove = uniqueTerroristNames.indexOf(correctAnswer);
 
-        const randomIndex = Math.floor(Math.random() * terroristData.length);
-        const currentTerrorist = terroristData[randomIndex];
-        const correctAnswer = currentTerrorist.TOrgutAdi;
-        const uniqueTerroristNames = Array.from(new Set(terroristData.map(data => data.TOrgutAdi)));
-        const indexToRemove = uniqueTerroristNames.indexOf(correctAnswer);
-        if (indexToRemove !== -1) {
-            uniqueTerroristNames.splice(indexToRemove, 1);
-        }
+    if (indexToRemove !== -1) {
+      uniqueTerroristNames.splice(indexToRemove, 1);
+    }
 
-        const incorrectAnswers = [];
-        for (let i = 0; i < 3; i++) {
-            const randomIndex = Math.floor(Math.random() * uniqueTerroristNames.length);
-            incorrectAnswers.push(uniqueTerroristNames[randomIndex]);
-            uniqueTerroristNames.splice(randomIndex, 1);
-        }
+    const incorrectAnswers = [];
 
-        const allAnswers = [correctAnswer, ...incorrectAnswers].sort(() => Math.random() - 0.5);
-        const quizContainer = document.getElementById('quiz-container');
-        quizContainer.innerHTML = `
-    <div class="image-container">
+    for (let i = 0; i < 3; i++) {
+      const randomIndex = Math.floor(Math.random() * uniqueTerroristNames.length);
+      incorrectAnswers.push(uniqueTerroristNames[randomIndex]);
+      uniqueTerroristNames.splice(randomIndex, 1);
+    }
+
+    const allAnswers = [correctAnswer, ...incorrectAnswers].sort(() => Math.random() - 0.5);
+    const quizContainer = document.getElementById('quiz-container');
+
+    quizContainer.innerHTML = `<div class="image-container">
       <img src="https://www.terorarananlar.pol.tr/${currentTerrorist.IlkGorselURL}" alt="Terrorist Image">
     </div>
     <p>Hangi orgut?</p>
     ${allAnswers.map(answer => `<button class="answer-button" onclick="checkAnswer('${correctAnswer}', '${answer}')">${answer}</button>`).join('')}
-  `;
-    }
+    `;
+  }
 
-    function checkAnswer(correctAnswer, selectedAnswer) {
-        if (selectedAnswer === correctAnswer) {
-            alert('Bravo!');
-            correctScore++;
-        } else {
-            alert('Malesef. ' + correctAnswer + " olacakti.");
-            incorrectScore++;
+  function checkAnswer(correctAnswer, selectedAnswer) {
+    if (selectedAnswer === correctAnswer) {
+      Swal.fire({
+        icon: 'success',
+        text: 'Bravo!',
+        confirmButtonText: 'Devam',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          correctScore++;
+
+          updateScoreboard();
+          displayQuiz();
         }
-        updateScoreboard();
-        displayQuiz();
-    }
+      });
+    } else {
+      Swal.fire({
+        icon: 'error',
+        text: `Maalesef. ${correctAnswer} olacakti.`,
+        confirmButtonText: 'Devam',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          incorrectScore++;
 
-    function updateScoreboard() {
-        const scoreboard = document.getElementById('scoreboard');
-        scoreboard.textContent = `Dogru: ${correctScore} | Yanlis: ${incorrectScore}`;
+          updateScoreboard();
+          displayQuiz();
+        }
+      });
     }
+  }
 
-    window.onload = displayQuiz;
+  function updateScoreboard() {
+    const scoreboard = document.getElementById('scoreboard');
+    scoreboard.textContent = `Dogru: ${correctScore} | Yanlis: ${incorrectScore}`;
+  }
+
+  window.onload = displayQuiz;
 </script>
 </body>
 </html>
