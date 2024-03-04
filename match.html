@@ -26,14 +26,6 @@
       }
     }
 
-    .image-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 20px;
-      height: 300px;
-    }
-
     .people {
       display: flex;
       flex-wrap: wrap;
@@ -96,18 +88,20 @@
       height: 40px;
     }
 
-    .answer-button {
-      margin: 5px;
+    .person .droppable.answer--correct {
+      color: green;
+    }
+
+    .person .droppable.answer--incorrect {
+      color: red;
+    }
+
+    .button--play-again {
+      margin: 15px;
       padding: 10px 20px;
       font-size: 16px;
       cursor: pointer;
     }
-
-    .scoreboard {
-      margin-top: 20px;
-      font-size: 18px;
-    }
-
   </style>
 
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -224,12 +218,36 @@
 
         Swal.fire({
           title: title,
-          text: `4 orgutten ${correct} tanesini dogru eslestirdin. Devam mi bastan mi?`,
-          confirmButtonText: 'Tekrar',
-          icon: 'info'
+          text: `4 orgutten ${correct} tanesini dogru eslestirdin.`,
+          confirmButtonText: 'Tekrar Oyna',
+          icon: 'info',
+          ...((correct < 4) && {
+            showCancelButton: true,
+            cancelButtonText: 'Cevaplara Bakayim',
+          }),
         }).then((result) => {
           if (result.isConfirmed) {
             window.location.reload();
+          } else {
+            optionsElement.remove();
+
+            zones.forEach((zone) => {
+              const answer = zone.firstChild;
+
+              if (answer.dataset.org === zone.dataset.org) {
+                zone.classList.add('answer--correct');
+              } else {
+                zone.classList.add('answer--incorrect');
+                answer.firstChild.innerHTML = zone.dataset.org;
+              }
+            });
+
+            const replayButton = document.createElement('button');
+            replayButton.innerText = 'Tekrar Oyna';
+            replayButton.onclick = () => window.location.reload();
+            replayButton.classList.add('button--play-again');
+
+            document.querySelector('.container').append(replayButton);
           }
         });
       });
