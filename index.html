@@ -173,7 +173,7 @@
       Swal.fire({
         icon: 'success',
         text: 'Bravo!',
-        confirmButtonText: 'Continue',
+        confirmButtonText: 'Devam',
       }).then((result) => {
         if (result.isConfirmed) {
           correctAnswers++;
@@ -186,7 +186,7 @@
       Swal.fire({
         icon: 'error',
         text: `Maalesef. ${correctAnswer} olacakti.`,
-        confirmButtonText: 'Continue',
+        confirmButtonText: 'Devam',
       }).then((result) => {
         if (result.isConfirmed) {
           incorrectScore++;
