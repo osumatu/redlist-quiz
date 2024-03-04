@@ -61,11 +61,14 @@
   document.getElementById('reset-button').addEventListener('click', function() {
     correctScore = 0;
     incorrectScore = 0;
+    totalQuestionsAnswered = 0;
     updateScoreboard();
   });
 
   let correctScore = localStorage.getItem('correctScore') ? parseInt(localStorage.getItem('correctScore')) : 0;
   let incorrectScore = localStorage.getItem('incorrectScore') ? parseInt(localStorage.getItem('incorrectScore')) : 0;
+  let totalQuestionsAnswered = correctScore + incorrectScore
+
 
   async function fetchTerroristData() {
     try {
@@ -122,14 +125,11 @@
     `;
   }
 
-  let totalQuestionsAnswered = 0;
-  let correctAnswers = 0;
-
   async function checkQuestionCount() {
     totalQuestionsAnswered++;
 
     if (totalQuestionsAnswered % 20 === 0) {
-      const successRate = ((correctAnswers / totalQuestionsAnswered) * 100).toFixed(2);
+      const successRate = ((correctScore / totalQuestionsAnswered) * 100).toFixed(2);
 
       let title = '';
 
@@ -157,7 +157,6 @@
           correctScore = 0;
           incorrectScore = 0;
           totalQuestionsAnswered = 0;
-          correctAnswers = 0;
           updateScoreboard();
           displayQuiz();
         }
@@ -176,7 +175,6 @@
         confirmButtonText: 'Devam',
       }).then((result) => {
         if (result.isConfirmed) {
-          correctAnswers++;
           correctScore++;
           updateScoreboard();
           checkQuestionCount();
