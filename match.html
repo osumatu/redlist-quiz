@@ -161,10 +161,15 @@
         board.push(terrorist);
       }
 
+      const shuffled = board
+        .map(value => ({ value, sort: Math.random() }))
+        .sort((a, b) => a.sort - b.sort)
+        .map(({ value }) => value)
+
       const quizContainer = document.getElementById('quiz-container');
 
       quizContainer.innerHTML = `<div class="options">
-        ${board.sort(() => .5 - Math.random()).map((person) => {
+        ${shuffled.map((person) => {
           return `<div class="droppable draggable-dropzone--occupied">
             <div class="answer-draggable" data-org="${person.TOrgutAdi}"><span>${person.TOrgutAdi}</span></div>
           </div>`;
