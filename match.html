@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terorist Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .image-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+      height: 300px;
+    }
+
+    .people {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+    }
+
+    .options {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 21.44px;
+      height: 30.5px;
+    }
+
+    .options .droppable {
+      margin-right: 4px;
+    }
+
+    .options .droppable:not(.draggable-dropzone--occupied) {
+      min-width: 60px;
+      border: 2px dashed black;
+    }
+
+    .options .answer-draggable {
+      padding: 4px;
+      border: 2px solid black;
+    }
+
+    .options .answer-draggable span {
+      pointer-events: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .person {
+      flex: 0 0 225px;
+      margin-bottom: 4px;
+    }
+
+    .person .droppable {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px dashed black;
+      width: 100%;
+      height: 40px;
+    }
+
+    img {
+      width: 225px;
+      height: 300px;
+    }
+
+    .answer-button {
+      margin: 5px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .scoreboard {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+
+  </style>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script defer src="https://analytics.eu.umami.is/script.js" data-website-id="c21f2db2-88e9-4f47-931e-106a38134e74"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>Terorist - Orgut Eslestir</h1>
+    <div id="quiz-container"></div>
+  </div>
+
+  <script type="module">
+    import { Droppable } from 'https://cdn.jsdelivr.net/npm/@shopify/draggable@1.1.3/+esm'
+
+    async function fetchTerroristData() {
+      try {
+        const response = await fetch('https://raw.githubusercontent.com/osumatu/terorist-quiz/main/data.json');
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch data');
+        }
+
+        const data = await response.json();
+        return data.filter((terrorist) => !!terrorist.GorselURL?.length);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+
+        return [];
+      }
+    }
+
+    async function displayQuiz() {
+      const terroristData = await fetchTerroristData();
+
+      if (terroristData.length === 0) {
+        alert('Failed to fetch data. Please try again later.');
+
+        return;
+      }
+
+      const board = [];
+
+      const allOrganisations = terroristData.map((t) => t.TOrgutAdi).filter((v, i, a) => a.indexOf(v) === i);
+      const randomOrganisations = allOrganisations.sort(() => 0.5 - Math.random()).slice(0, 4);
+
+      for (let i = 0; i < 4; i++) {
+        const organisation = randomOrganisations[i];
+        const [terrorist] = terroristData.filter((t) => t.TOrgutAdi === organisation).sort(() => 0.5 - Math.random());
+
+        board.push(terrorist);
+      }
+
+      const quizContainer = document.getElementById('quiz-container');
+
+      quizContainer.innerHTML = `<div class="options">
+        ${board.sort(() => .5 - Math.random()).map((person) => {
+          return `<div class="droppable draggable-dropzone--occupied">
+            <div class="answer-draggable" data-org="${person.TOrgutAdi}"><span>${person.TOrgutAdi}</span></div>
+          </div>`;
+        }).join('')}
+      </div>
+      <div class="people">
+        ${board.map((person) => {
+          return `<div class="person">
+            <img src="https://www.terorarananlar.pol.tr/${person.IlkGorselURL}" alt="Terrorist Image">
+            <div class="droppable" data-org="${person.TOrgutAdi}"></div>
+          </div>`;
+        }).join('')}
+      </div>`;
+
+      const droppable = new Droppable(document.querySelectorAll('#quiz-container'), {
+        draggable: '.answer-draggable',
+        dropzone: '.droppable',
+      });
+
+      droppable.on('droppable:stop', (evt) => {
+        const zones = Array.from(document.querySelectorAll('.person .droppable'));
+        const allFilled = zones.every((zone) => zone.classList.contains('draggable-dropzone--occupied'));
+
+        if (!allFilled) {
+          return;
+        }
+        
+        let correct = 0;
+
+        zones.forEach((zone) => {
+          const answer = zone.firstChild;
+
+          if (answer && answer.dataset.org === zone.dataset.org) {
+            correct++;
+          }
+        });
+
+        let title = '';
+
+        if (correct === 4) {
+          title = 'MIT goreve cagiriyor!';
+        } else if (correct === 3) {
+          title = 'Yuru be babus!';
+        } else if (correct === 2) {
+          title = 'Ha gayret.';
+        } else {
+          title = 'Hocam goz var izan var ya.';
+        }
+
+        Swal.fire({
+          title: title,
+          text: `4 orgutten ${correct} tanesini dogru eslestirdin. Devam mi bastan mi?`,
+          confirmButtonText: 'Tekrar',
+          icon: 'info'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location.reload();
+          }
+        });
+      });
+    }
+
+    window.onload = function() {
+      displayQuiz();
+    };
+  </script>
+</body>
+</html>
