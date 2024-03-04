@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terorist Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .image-container img {
+      height: 300px;
+      aspect-ratio: 3 / 4;
+    }
+
+    .answer-button {
+      margin: 5px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .scoreboard {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 34px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+
+    input:checked + .slider {
+      background-color: #2196F3;
+    }
+
+    input:focus + .slider {
+      box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked + .slider:before {
+      -webkit-transform: translateX(26px);
+      -ms-transform: translateX(26px);
+      transform: translateX(26px);
+    }
+
+    .slider.round {
+      border-radius: 34px;
+    }
+
+    .slider.round:before {
+      border-radius: 50%;
+    }
+  </style>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script defer src="https://analytics.eu.umami.is/script.js" data-website-id="c21f2db2-88e9-4f47-931e-106a38134e74"></script>
+</head>
+<body>
+<div class="container">
+  <h1>Terorist Quiz</h1>
+  <div id="quiz-container"></div>
+  <div id="scoreboard" class="scoreboard">Dogru: 0 | Yanlis: 0</div>
+  <br/>
+  <button id="reset-button">Skoru Sifirla</button>
+  <br/>
+  <div class="container">
+    <h2>Sivilleri Ekle</h2>
+    <label class="switch">
+      <input type="checkbox" id="include-civilians-toggle" onchange="toggleIncludeCivilians()" checked>
+      <span class="slider round"></span>
+    </label>
+  </div>
+</div>
+<script>
+
+  document.getElementById('reset-button').addEventListener('click', function() {
+    correctScore = 0;
+    incorrectScore = 0;
+    totalQuestionsAnswered = 0;
+    updateScoreboard();
+  });
+
+  let correctScore = localStorage.getItem('correctScore') ? parseInt(localStorage.getItem('correctScore')) : 0;
+  let incorrectScore = localStorage.getItem('incorrectScore') ? parseInt(localStorage.getItem('incorrectScore')) : 0;
+  let totalQuestionsAnswered = correctScore + incorrectScore;
+
+  let includeCivilians = true;
+
+  async function fetchTerroristData() {
+    try {
+      const response = await fetch('https://raw.githubusercontent.com/osumatu/terorist-quiz/main/data.json');
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch data');
+      }
+      const data = await response.json();
+      return data.filter((terrorist) => !!terrorist.GorselURL?.length)
+        .map(terrorist => {
+          terrorist.IlkGorselURL = "https://www.terorarananlar.pol.tr/" + terrorist.IlkGorselURL;
+          return terrorist;
+        });
+
+    } catch (error) {
+      console.error('Error fetching data:', error);
+
+      return [];
+    }
+  }
+
+  async function fetchCivilianData() {
+    try {
+      const civilianImageUrl = 'https://thispersondoesnotexist.com/';
+      const civilianData = [];
+
+      for (let i = 0; i < 10000; i++) {
+        const imageUrl = `${civilianImageUrl}?=${i}`;
+        const resizedImageUrl = await resizeImage(imageUrl, 150);
+
+        civilianData.push({
+          TOrgutAdi: 'Sivil',
+          IlkGorselURL: resizedImageUrl
+        });
+      }
+
+      return civilianData;
+    } catch (error) {
+      console.error('Error fetching civilian data:', error);
+      return [];
+    }
+  }
+
+  async function resizeImage(imageUrl, maxWidth) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.crossOrigin = 'Anonymous';
+      img.onload = function () {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        const aspectRatio = img.height / img.width;
+        const newWidth = maxWidth;
+        const newHeight = newWidth * aspectRatio;
+
+        canvas.width = newWidth;
+        canvas.height = newHeight;
+        ctx.drawImage(img, 0, 0, newWidth, newHeight);
+
+        canvas.toBlob((blob) => {
+          const reader = new FileReader();
+          reader.readAsDataURL(blob);
+          reader.onloadend = function () {
+            resolve(reader.result);
+          };
+        }, 'image/jpeg', 0.5); // Adjust quality here (0.5 means 50% quality)
+      };
+      img.onerror = function (error) {
+        reject(error);
+      };
+      img.src = imageUrl;
+    });
+  }
+
+
+  async function populateQuizData() {
+    let terroristData = await fetchTerroristData();
+    let civilianData = [];
+
+    if (includeCivilians) {
+      civilianData = await fetchCivilianData();
+    }
+
+    const combinedData = includeCivilians ? [...terroristData, ...civilianData] : terroristData;
+    combinedData.sort(() => Math.random() - 0.5);
+
+    return combinedData;
+  }
+
+  function toggleIncludeCivilians() {
+    includeCivilians = !includeCivilians;
+  }
+
+  async function displayQuiz() {
+    const terroristData = await populateQuizData();
+
+    if (terroristData.length === 0) {
+      alert('Failed to fetch data. Please try again later.');
+
+      return;
+    }
+
+    const randomIndex = Math.floor(Math.random() * terroristData.length);
+    const currentTerrorist = terroristData[randomIndex];
+    const correctAnswer = currentTerrorist.TOrgutAdi;
+    const uniqueTerroristNames = Array.from(new Set(terroristData.map(data => data.TOrgutAdi)));
+    const indexToRemove = uniqueTerroristNames.indexOf(correctAnswer);
+
+    if (indexToRemove !== -1) {
+      uniqueTerroristNames.splice(indexToRemove, 1);
+    }
+
+    const incorrectAnswers = [];
+
+    for (let i = 0; i < 3; i++) {
+      const randomIndex = Math.floor(Math.random() * uniqueTerroristNames.length);
+      incorrectAnswers.push(uniqueTerroristNames[randomIndex]);
+      uniqueTerroristNames.splice(randomIndex, 1);
+    }
+
+    const allAnswers = [correctAnswer, ...incorrectAnswers].sort(() => Math.random() - 0.5);
+    const quizContainer = document.getElementById('quiz-container');
+
+    quizContainer.innerHTML = `<div class="image-container">
+      <img src="${currentTerrorist.IlkGorselURL}" alt="Terrorist Image">
+    </div>
+    <p>Hangi orgut?</p>
+    ${allAnswers.map(answer => `<button class="answer-button" onclick="checkAnswer('${correctAnswer}', '${answer}')">${answer}</button>`).join('')}
+    `;
+  }
+
+  async function checkQuestionCount() {
+    totalQuestionsAnswered++;
+
+    if (totalQuestionsAnswered % 20 === 0) {
+      const successRate = ((correctScore / totalQuestionsAnswered) * 100).toFixed(2);
+
+      let title = '';
+
+      if (successRate >= 80) {
+        title = 'MIT goreve cagiriyor!';
+      } else if (successRate >= 60) {
+        title = 'Yuru be babus!';
+      } else if (successRate >= 40) {
+        title = 'Ha gayret.';
+      } else {
+        title = 'Hocam goz var izan var ya.';
+      }
+
+      Swal.fire({
+        title: title,
+        text: `%${successRate} oranla dogru bildin. Devam mi bastan mi?`,
+        showCancelButton: true,
+        confirmButtonText: 'Devam',
+        cancelButtonText: 'Bastan',
+        icon: 'info'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          displayQuiz();
+        } else {
+          correctScore = 0;
+          incorrectScore = 0;
+          totalQuestionsAnswered = 0;
+          updateScoreboard();
+          displayQuiz();
+        }
+      });
+    } else {
+      displayQuiz();
+    }
+  }
+
+
+  function checkAnswer(correctAnswer, selectedAnswer) {
+    if (selectedAnswer === correctAnswer) {
+      Swal.fire({
+        icon: 'success',
+        text: 'Bravo!',
+        confirmButtonText: 'Devam',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          correctScore++;
+          updateScoreboard();
+          checkQuestionCount();
+        }
+      });
+    } else {
+      Swal.fire({
+        icon: 'error',
+        text: `Maalesef. ${correctAnswer} olacakti.`,
+        confirmButtonText: 'Devam',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          incorrectScore++;
+          updateScoreboard();
+          checkQuestionCount();
+        }
+      });
+    }
+  }
+
+  function updateScoreboard() {
+    const scoreboard = document.getElementById('scoreboard');
+    scoreboard.textContent = `Dogru: ${correctScore} | Yanlis: ${incorrectScore}`;
+
+    localStorage.setItem('correctScore', correctScore);
+    localStorage.setItem('incorrectScore', incorrectScore);
+  }
+
+  window.onload = function() {
+    updateScoreboard();
+    displayQuiz();
+  };
+</script>
+</body>
+</html>
