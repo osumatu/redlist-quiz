@@ -52,11 +52,18 @@
     <h1>Terorist Quiz</h1>
     <div id="quiz-container"></div>
     <div id="scoreboard" class="scoreboard">Dogru: 0 | Yanlis: 0</div>
+    <button id="reset-button">Skoru Sifirla</button>
   </div>
-
 <script>
-  let correctScore = 0;
-  let incorrectScore = 0;
+
+  document.getElementById('reset-button').addEventListener('click', function() {
+    correctScore = 0;
+    incorrectScore = 0;
+    updateScoreboard();
+  });
+
+  let correctScore = localStorage.getItem('correctScore') ? parseInt(localStorage.getItem('correctScore')) : 0;
+  let incorrectScore = localStorage.getItem('incorrectScore') ? parseInt(localStorage.getItem('incorrectScore')) : 0;
 
   async function fetchTerroristData() {
     try {
@@ -146,9 +153,16 @@
   function updateScoreboard() {
     const scoreboard = document.getElementById('scoreboard');
     scoreboard.textContent = `Dogru: ${correctScore} | Yanlis: ${incorrectScore}`;
+
+    // Store the scores in localStorage
+    localStorage.setItem('correctScore', correctScore);
+    localStorage.setItem('incorrectScore', incorrectScore);
   }
 
-  window.onload = displayQuiz;
+  window.onload = function() {
+    updateScoreboard();
+    displayQuiz();
+  };
 </script>
 </body>
 </html>
