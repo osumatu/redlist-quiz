@@ -35,6 +35,64 @@
       font-size: 18px;
     }
 
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 34px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+
+    input:checked + .slider {
+      background-color: #2196F3;
+    }
+
+    input:focus + .slider {
+      box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked + .slider:before {
+      -webkit-transform: translateX(26px);
+      -ms-transform: translateX(26px);
+      transform: translateX(26px);
+    }
+
+    .slider.round {
+      border-radius: 34px;
+    }
+
+    .slider.round:before {
+      border-radius: 50%;
+    }
   </style>
 
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -47,6 +105,14 @@
     <div id="scoreboard" class="scoreboard">Dogru: 0 | Yanlis: 0</div>
     <br/>
     <button id="reset-button">Skoru Sifirla</button>
+    <br/>
+    <div class="container">
+      <h2>Sivilleri Ekle</h2>
+      <label class="switch">
+        <input type="checkbox" id="include-civilians-toggle" onchange="toggleIncludeCivilians()" checked>
+        <span class="slider round"></span>
+      </label>
+    </div>
   </div>
 <script>
 
@@ -59,8 +125,9 @@
 
   let correctScore = localStorage.getItem('correctScore') ? parseInt(localStorage.getItem('correctScore')) : 0;
   let incorrectScore = localStorage.getItem('incorrectScore') ? parseInt(localStorage.getItem('incorrectScore')) : 0;
-  let totalQuestionsAnswered = correctScore + incorrectScore
+  let totalQuestionsAnswered = correctScore + incorrectScore;
 
+  let includeCivilians = true;
 
   async function fetchTerroristData() {
     try {
@@ -69,9 +136,13 @@
       if (!response.ok) {
         throw new Error('Failed to fetch data');
       }
-
       const data = await response.json();
-      return data.filter((terrorist) => !!terrorist.GorselURL?.length);
+      return data.filter((terrorist) => !!terrorist.GorselURL?.length)
+        .map(terrorist => {
+          terrorist.IlkGorselURL = "https://www.terorarananlar.pol.tr/" + terrorist.IlkGorselURL;
+          return terrorist;
+        });
+
     } catch (error) {
       console.error('Error fetching data:', error);
 
@@ -79,8 +150,45 @@
     }
   }
 
+  async function fetchCivilianData() {
+    try {
+      const civilianImageUrl = 'https://thispersondoesnotexist.com/';
+      const civilianData = [];
+
+      for (let i = 0; i < 1000; i++) {
+        civilianData.push({
+          TOrgutAdi: 'Sivil',
+          IlkGorselURL: civilianImageUrl
+        });
+      }
+
+      return civilianData;
+    } catch (error) {
+      console.error('Error fetching civilian data:', error);
+      return [];
+    }
+  }
+
+  async function populateQuizData() {
+    let terroristData = await fetchTerroristData();
+    let civilianData = [];
+
+    if (includeCivilians) {
+      civilianData = await fetchCivilianData();
+    }
+
+    const combinedData = includeCivilians ? [...terroristData, ...civilianData] : terroristData;
+    combinedData.sort(() => Math.random() - 0.5);
+
+    return combinedData;
+  }
+
+  function toggleIncludeCivilians() {
+    includeCivilians = !includeCivilians;
+  }
+
   async function displayQuiz() {
-    const terroristData = await fetchTerroristData();
+    const terroristData = await populateQuizData();
 
     if (terroristData.length === 0) {
       alert('Failed to fetch data. Please try again later.');
@@ -110,7 +218,7 @@
     const quizContainer = document.getElementById('quiz-container');
 
     quizContainer.innerHTML = `<div class="image-container">
-      <img src="https://www.terorarananlar.pol.tr/${currentTerrorist.IlkGorselURL}" alt="Terrorist Image">
+      <img src="${currentTerrorist.IlkGorselURL}" alt="Terrorist Image">
     </div>
     <p>Hangi orgut?</p>
     ${allAnswers.map(answer => `<button class="answer-button" onclick="checkAnswer('${correctAnswer}', '${answer}')">${answer}</button>`).join('')}
