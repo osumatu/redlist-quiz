@@ -290,11 +290,9 @@
         text: 'Bravo!',
         confirmButtonText: 'Devam',
       }).then((result) => {
-        if (result.isConfirmed) {
-          correctScore++;
-          updateScoreboard();
-          checkQuestionCount();
-        }
+        correctScore++;
+        updateScoreboard();
+        checkQuestionCount();
       });
     } else {
       Swal.fire({
@@ -302,11 +300,9 @@
         text: `Maalesef. ${correctAnswer} olacaktı.`,
         confirmButtonText: 'Devam',
       }).then((result) => {
-        if (result.isConfirmed) {
-          incorrectScore++;
-          updateScoreboard();
-          checkQuestionCount();
-        }
+        incorrectScore++;
+        updateScoreboard();
+        checkQuestionCount();
       });
     }
   }
