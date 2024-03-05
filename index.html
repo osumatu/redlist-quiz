@@ -234,7 +234,7 @@
       let title = '';
 
       if (successRate >= 80) {
-        title = 'MIT goreve cagiriyor!';
+        title = 'MİT seni goreve çağıriyor!';
       } else if (successRate >= 60) {
         title = 'Yuru be babus!';
       } else if (successRate >= 40) {
@@ -245,7 +245,7 @@
 
       Swal.fire({
         title: title,
-        text: `%${successRate} oranla dogru bildin. Devam mi bastan mi?`,
+        html: `%${successRate} oranla dogru bildin. <br> <button id="mitButton" class="swal2-confirm swal2-styled" onclick="openMitPage()">MİT'e Başvur</button> <br> Devam mi bastan mi?`,
         showCancelButton: true,
         confirmButtonText: 'Devam',
         cancelButtonText: 'Bastan',
@@ -264,14 +264,47 @@
     } else {
       displayQuiz();
     }
-  }
+}
 
+function openMitPage() {
+  window.open('https://www.mit.gov.tr/kariyer.html', '_blank');
+}
 
-  function checkAnswer(correctAnswer, selectedAnswer) {
+function checkAnswer(correctAnswer, selectedAnswer) {
     if (selectedAnswer === correctAnswer) {
       Swal.fire({
         icon: 'success',
         text: 'Bravo!',
+        confirmButtonText: 'Devam',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          correctScore++;
+          updateScoreboard();
+          checkQuestionCount();
+        }
+      });
+    } else {
+      Swal.fire({
+        icon: 'error',
+        text: `Maalesef. ${correctAnswer} olacakti.`,
+        confirmButtonText: 'Devam',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          incorrectScore++;
+          updateScoreboard();
+          checkQuestionCount();
+        }
+      });
+    }
+}
+
+
+function checkAnswer(correctAnswer, selectedAnswer) {
+    if (selectedAnswer === correctAnswer) {
+      Swal.fire({
+        icon: 'success',
+        text: 'Bravo!',
+        kariyerButton: 'Kariyer',
         confirmButtonText: 'Devam',
       }).then((result) => {
         if (result.isConfirmed) {
