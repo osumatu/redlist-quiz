@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Terrorist Quiz</title>
-  <style>
+  <style id="stylesheet">
     body {
       font-family: Arial, sans-serif;
       text-align: center;
@@ -106,6 +106,57 @@
     .about summary:first-of-type {
       list-style-type: "❓";
     }
+    /* dark mode için başlangıç */
+    .dark-mode {
+        background-color: #222;
+        color: #fff;
+    }
+    .toggle-container {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .toggle {
+        display: inline-block;
+        cursor: pointer;
+        width: 60px;
+        height: 34px;
+        position: relative;
+    }
+    .toggle input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+    .toggle-slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: .4s;
+        border-radius: 34px;
+    }
+    .toggle-slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        transition: .4s;
+        border-radius: 50%;
+    }
+    input:checked + .toggle-slider {
+        background-color: #2196F3;
+    }
+    input:checked + .toggle-slider:before {
+        transform: translateX(26px);
+    }
+    /* dark mode için bitiş */
+
   </style>
 
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -130,6 +181,14 @@
       <p>Sivillerin fotoğrafları yapay zeka ile insan fotoğrafı üreten <a target="_blank" href="https://thispersondoesnotexist.com">https://thispersondoesnotexist.com</a> adresinden alınmaktadır.</p>
     </details>
   </div>
+  <!-- dark mode switch -->
+  <div class="toggle-container">
+    <span>Koyu Mod</span><br><br>
+    <label class="toggle">
+        <input type="checkbox" id="darkModeToggle">
+        <span class="toggle-slider"></span>
+    </label>    
+</div>
 <script>
 
   document.getElementById('reset-button').addEventListener('click', function() {
@@ -161,17 +220,16 @@
 
     } catch (error) {
       console.error('Error fetching data:', error);
-
+      
       return [];
     }
   }
 
   async function fetchCivilianData() {
-    try {
-      const civilianImageUrl = 'https://thispersondoesnotexist.com/';
-      const civilianData = [];
-
+    try {      
+      var civilianData = [];
       for (let i = 0; i < 750; i++) {
+        var civilianImageUrl = `https://thispersondoesnotexist.com/?${Date.now()}`;
         civilianData.push({
           TOrgutAdi: 'Sivil',
           IlkGorselURL: civilianImageUrl
@@ -187,7 +245,7 @@
 
   async function populateQuizData() {
     let terroristData = await fetchTerroristData();
-    let civilianData = [];
+    var civilianData = [];
 
     if (includeCivilians) {
       civilianData = await fetchCivilianData();
@@ -195,14 +253,14 @@
 
     const combinedData = includeCivilians ? [...terroristData, ...civilianData] : terroristData;
     combinedData.sort(() => Math.random() - 0.5);
-
-    return combinedData;
+    
+    return combinedData;    
   }
 
   function toggleIncludeCivilians() {
     includeCivilians = !includeCivilians;
   }
-
+  
   async function displayQuiz() {
     const terroristData = await populateQuizData();
 
@@ -232,7 +290,6 @@
 
     const allAnswers = [correctAnswer, ...incorrectAnswers].sort(() => Math.random() - 0.5);
     const quizContainer = document.getElementById('quiz-container');
-
     quizContainer.innerHTML = `<div class="image-container">
       <img src="${currentTerrorist.IlkGorselURL}" alt="Terrorist Image">
     </div>
@@ -258,14 +315,16 @@
       } else {
         title = 'Hocam göz var izan var ya.';
       }
-
       Swal.fire({
         title: title,
         text: `%${successRate} oranla doğru bildin. Devam mı baştan mı?`,
         showCancelButton: true,
         confirmButtonText: 'Devam',
         cancelButtonText: 'Baştan',
-        icon: 'info'
+        icon: 'info',
+        customClass: {
+          popup:"popup-dark"
+        }        
       }).then((result) => {
         if (result.isConfirmed) {
           displayQuiz();
@@ -282,13 +341,15 @@
     }
   }
 
-
   function checkAnswer(correctAnswer, selectedAnswer) {
     if (selectedAnswer === correctAnswer) {
       Swal.fire({
         icon: 'success',
         text: 'Bravo!',
         confirmButtonText: 'Devam',
+        customClass: {
+          popup:"popup-dark"
+        }
       }).then((result) => {
         correctScore++;
         updateScoreboard();
@@ -299,6 +360,9 @@
         icon: 'error',
         text: `Maalesef. ${correctAnswer} olacaktı.`,
         confirmButtonText: 'Devam',
+        customClass: {
+          popup:"popup-dark"
+        }
       }).then((result) => {
         incorrectScore++;
         updateScoreboard();
@@ -319,6 +383,26 @@
     updateScoreboard();
     displayQuiz();
   };
+</script>
+<!-- dark mode için -->
+<script>
+  const darkModeToggle = document.getElementById('darkModeToggle');
+  const darkMode = document.body.classList.contains('dark-mode');
+  const stylesheet = document.getElementById('stylesheet').sheet; 
+  darkModeToggle.addEventListener('change', () => {
+      document.body.classList.toggle('dark-mode');
+      KoyuYap()
+  });
+  function KoyuYap(){
+    const darkMode = document.body.classList.contains('dark-mode');
+    if(darkMode){
+      stylesheet.insertRule(".popup-dark {background-color: #222; color: #fff;}", 0);
+      console.log("ekledi")
+    }else{
+      stylesheet.deleteRule(0)
+      console.log("sildi")
+    }
+  }
 </script>
 </body>
 </html>
