@@ -1267,26 +1267,6 @@
     "TKategoriAdi": "kırmızı"
   },
   {
-    "Adi": "Ramazan",
-    "Soyadi": "ABI",
-    "GorselURL": [
-      "/kurumlar/terorarananlar.pol.tr/30-KOMISYON/BOS.jpg"
-    ],
-    "IlkGorselURL": "/kurumlar/terorarananlar.pol.tr/30-KOMISYON/BOS.jpg",
-    "TOrgutAdi": "PKK/KCK",
-    "TKategoriAdi": "kırmızı"
-  },
-  {
-    "Adi": "Mehmet Sadık",
-    "Soyadi": "KAYA",
-    "GorselURL": [
-      "/kurumlar/terorarananlar.pol.tr/30-KOMISYON/BOS.jpg"
-    ],
-    "IlkGorselURL": "/kurumlar/terorarananlar.pol.tr/30-KOMISYON/BOS.jpg",
-    "TOrgutAdi": "PKK/KCK",
-    "TKategoriAdi": "kırmızı"
-  },
-  {
     "Adi": "Gurbet",
     "Soyadi": "KARA",
     "GorselURL": [
@@ -1473,16 +1453,6 @@
       "/kurumlar/terorarananlar.pol.tr/30-KOMISYON/44-AZAD-AKINCI.jpg"
     ],
     "IlkGorselURL": "/kurumlar/terorarananlar.pol.tr/30-KOMISYON/44-AZAD-AKINCI.jpg",
-    "TOrgutAdi": "PKK/KCK",
-    "TKategoriAdi": "kırmızı"
-  },
-  {
-    "Adi": "Abbas",
-    "Soyadi": "SERTKAYA",
-    "GorselURL": [
-      "/kurumlar/terorarananlar.pol.tr/30-KOMISYON/BOS.jpg"
-    ],
-    "IlkGorselURL": "/kurumlar/terorarananlar.pol.tr/30-KOMISYON/BOS.jpg",
     "TOrgutAdi": "PKK/KCK",
     "TKategoriAdi": "kırmızı"
   },
@@ -15798,16 +15768,6 @@
     "TKategoriAdi": "gri"
   },
   {
-    "Adi": "Mehmet",
-    "Soyadi": "ÖZBEK",
-    "GorselURL": [
-      "/kurumlar/terorarananlar.pol.tr/30-KOMISYON/BOS.jpg"
-    ],
-    "IlkGorselURL": "/kurumlar/terorarananlar.pol.tr/30-KOMISYON/BOS.jpg",
-    "TOrgutAdi": "HTŞ",
-    "TKategoriAdi": "gri"
-  },
-  {
     "Adi": "Muhammet Ahmet",
     "Soyadi": "BAHÇACI",
     "GorselURL": [
@@ -21326,16 +21286,6 @@
       "/kurumlar/terorarananlar.pol.tr/33KOMISYON/HASAN-TARIK-SEN.jpg"
     ],
     "IlkGorselURL": "/kurumlar/terorarananlar.pol.tr/33KOMISYON/HASAN-TARIK-SEN.jpg",
-    "TOrgutAdi": "FETÖ/PDY",
-    "TKategoriAdi": "yeşil"
-  },
-  {
-    "Adi": "İSMAİL",
-    "Soyadi": "YILMAZ",
-    "GorselURL": [
-      "/kurumlar/terorarananlar.pol.tr/33KOMISYON/BOS.jpg"
-    ],
-    "IlkGorselURL": "/kurumlar/terorarananlar.pol.tr/33KOMISYON/BOS.jpg",
     "TOrgutAdi": "FETÖ/PDY",
     "TKategoriAdi": "yeşil"
   },
