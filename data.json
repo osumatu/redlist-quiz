@@ -4956,14 +4956,6 @@
     "TKategoriAdi": "turuncu"
   },
   {
-    "Adi": "Vedat",
-    "Soyadi": "ALTUN",
-    "GorselURL": null,
-    "IlkGorselURL": "/Areas/WebPart/Contents/TArananlar/img/profil-arananlar.png",
-    "TOrgutAdi": "DEAŞ",
-    "TKategoriAdi": "turuncu"
-  },
-  {
     "Adi": "AMER",
     "Soyadi": "ONAY",
     "GorselURL": [
@@ -7812,14 +7804,6 @@
     "TKategoriAdi": "turuncu"
   },
   {
-    "Adi": "Serhat",
-    "Soyadi": "İPEKTEN",
-    "GorselURL": null,
-    "IlkGorselURL": "/Areas/WebPart/Contents/TArananlar/img/profil-arananlar.png",
-    "TOrgutAdi": "PKK/KCK",
-    "TKategoriAdi": "turuncu"
-  },
-  {
     "Adi": "Mehmet",
     "Soyadi": "BENEK",
     "GorselURL": [
@@ -9498,14 +9482,6 @@
       "/kurumlar/terorarananlar.pol.tr/33KOMISYON/YUNUS-COSAR.jpg"
     ],
     "IlkGorselURL": "/kurumlar/terorarananlar.pol.tr/33KOMISYON/YUNUS-COSAR.jpg",
-    "TOrgutAdi": "EL KAİDE",
-    "TKategoriAdi": "gri"
-  },
-  {
-    "Adi": "Özgür",
-    "Soyadi": "ÇOBAN",
-    "GorselURL": null,
-    "IlkGorselURL": "/Areas/WebPart/Contents/TArananlar/img/profil-arananlar.png",
     "TOrgutAdi": "EL KAİDE",
     "TKategoriAdi": "gri"
   },
@@ -15581,14 +15557,6 @@
     "TKategoriAdi": "gri"
   },
   {
-    "Adi": "Lokman",
-    "Soyadi": "PİRİZADE",
-    "GorselURL": null,
-    "IlkGorselURL": "/Areas/WebPart/Contents/TArananlar/img/profil-arananlar.png",
-    "TOrgutAdi": "HİZBULLAH",
-    "TKategoriAdi": "gri"
-  },
-  {
     "Adi": "Murat",
     "Soyadi": "KURTBOĞAN",
     "GorselURL": [
@@ -15756,14 +15724,6 @@
       "/kurumlar/terorarananlar.pol.tr/Arsiv/1716/FotoOrj.jpeg"
     ],
     "IlkGorselURL": "/kurumlar/terorarananlar.pol.tr/Arsiv/1716/FotoOrj.jpeg",
-    "TOrgutAdi": "HTŞ",
-    "TKategoriAdi": "gri"
-  },
-  {
-    "Adi": "Orhan",
-    "Soyadi": "ÇELİK",
-    "GorselURL": null,
-    "IlkGorselURL": "/Areas/WebPart/Contents/TArananlar/img/profil-arananlar.png",
     "TOrgutAdi": "HTŞ",
     "TKategoriAdi": "gri"
   },
@@ -16218,14 +16178,6 @@
     "TKategoriAdi": "gri"
   },
   {
-    "Adi": "Attila",
-    "Soyadi": "DEMİR",
-    "GorselURL": null,
-    "IlkGorselURL": "/Areas/WebPart/Contents/TArananlar/img/profil-arananlar.png",
-    "TOrgutAdi": "PKK/KCK",
-    "TKategoriAdi": "gri"
-  },
-  {
     "Adi": "Ferhat",
     "Soyadi": "ÜZÜMCÜOĞLU",
     "GorselURL": [
@@ -16307,22 +16259,6 @@
     "TKategoriAdi": "gri"
   },
   {
-    "Adi": "Lokman",
-    "Soyadi": "TAMUR",
-    "GorselURL": null,
-    "IlkGorselURL": "/Areas/WebPart/Contents/TArananlar/img/profil-arananlar.png",
-    "TOrgutAdi": "PKK/KCK",
-    "TKategoriAdi": "gri"
-  },
-  {
-    "Adi": "Hediye",
-    "Soyadi": "ZENGİN",
-    "GorselURL": null,
-    "IlkGorselURL": "/Areas/WebPart/Contents/TArananlar/img/profil-arananlar.png",
-    "TOrgutAdi": "PKK/KCK",
-    "TKategoriAdi": "gri"
-  },
-  {
     "Adi": "Salihe",
     "Soyadi": "BELLİER",
     "GorselURL": [
@@ -16343,44 +16279,12 @@
     "TKategoriAdi": "gri"
   },
   {
-    "Adi": "Sait",
-    "Soyadi": "ŞEDAL",
-    "GorselURL": null,
-    "IlkGorselURL": "/Areas/WebPart/Contents/TArananlar/img/profil-arananlar.png",
-    "TOrgutAdi": "PKK/KCK",
-    "TKategoriAdi": "gri"
-  },
-  {
     "Adi": "Medine",
     "Soyadi": "ÇAKMAKÇI",
     "GorselURL": [
       "/kurumlar/terorarananlar.pol.tr/Arsiv/649/FotoOrj.jpeg"
     ],
     "IlkGorselURL": "/kurumlar/terorarananlar.pol.tr/Arsiv/649/FotoOrj.jpeg",
-    "TOrgutAdi": "PKK/KCK",
-    "TKategoriAdi": "gri"
-  },
-  {
-    "Adi": "Roşhat",
-    "Soyadi": "İŞLEYEN",
-    "GorselURL": null,
-    "IlkGorselURL": "/Areas/WebPart/Contents/TArananlar/img/profil-arananlar.png",
-    "TOrgutAdi": "PKK/KCK",
-    "TKategoriAdi": "gri"
-  },
-  {
-    "Adi": "Mikail",
-    "Soyadi": "SOYDAN",
-    "GorselURL": null,
-    "IlkGorselURL": "/Areas/WebPart/Contents/TArananlar/img/profil-arananlar.png",
-    "TOrgutAdi": "PKK/KCK",
-    "TKategoriAdi": "gri"
-  },
-  {
-    "Adi": "Abdulbaki",
-    "Soyadi": "ÇORUH",
-    "GorselURL": null,
-    "IlkGorselURL": "/Areas/WebPart/Contents/TArananlar/img/profil-arananlar.png",
     "TOrgutAdi": "PKK/KCK",
     "TKategoriAdi": "gri"
   },
@@ -16463,14 +16367,6 @@
       "/kurumlar/terorarananlar.pol.tr/Arsiv/559/FotoOrj.jpeg"
     ],
     "IlkGorselURL": "/kurumlar/terorarananlar.pol.tr/Arsiv/559/FotoOrj.jpeg",
-    "TOrgutAdi": "PKK/KCK",
-    "TKategoriAdi": "gri"
-  },
-  {
-    "Adi": "Veysel",
-    "Soyadi": "YEŞİLTEPE",
-    "GorselURL": null,
-    "IlkGorselURL": "/Areas/WebPart/Contents/TArananlar/img/profil-arananlar.png",
     "TOrgutAdi": "PKK/KCK",
     "TKategoriAdi": "gri"
   },
@@ -16969,14 +16865,6 @@
     "TKategoriAdi": "gri"
   },
   {
-    "Adi": "Rezzak",
-    "Soyadi": "AYAR",
-    "GorselURL": null,
-    "IlkGorselURL": "/Areas/WebPart/Contents/TArananlar/img/profil-arananlar.png",
-    "TOrgutAdi": "PKK/KCK",
-    "TKategoriAdi": "gri"
-  },
-  {
     "Adi": "Muhammetsıddık",
     "Soyadi": "BUDAKBEYOĞLU",
     "GorselURL": [
@@ -17027,22 +16915,6 @@
     "TKategoriAdi": "gri"
   },
   {
-    "Adi": "İrfan",
-    "Soyadi": "BAKİ",
-    "GorselURL": null,
-    "IlkGorselURL": "/Areas/WebPart/Contents/TArananlar/img/profil-arananlar.png",
-    "TOrgutAdi": "PKK/KCK",
-    "TKategoriAdi": "gri"
-  },
-  {
-    "Adi": "Agit",
-    "Soyadi": "BAKİ",
-    "GorselURL": null,
-    "IlkGorselURL": "/Areas/WebPart/Contents/TArananlar/img/profil-arananlar.png",
-    "TOrgutAdi": "PKK/KCK",
-    "TKategoriAdi": "gri"
-  },
-  {
     "Adi": "Kezibe",
     "Soyadi": "KIRBAŞ",
     "GorselURL": [
@@ -17059,14 +16931,6 @@
       "/kurumlar/terorarananlar.pol.tr/Arsiv/664/FotoOrj.jpeg"
     ],
     "IlkGorselURL": "/kurumlar/terorarananlar.pol.tr/Arsiv/664/FotoOrj.jpeg",
-    "TOrgutAdi": "PKK/KCK",
-    "TKategoriAdi": "gri"
-  },
-  {
-    "Adi": "Serdar",
-    "Soyadi": "ANUŞ",
-    "GorselURL": null,
-    "IlkGorselURL": "/Areas/WebPart/Contents/TArananlar/img/profil-arananlar.png",
     "TOrgutAdi": "PKK/KCK",
     "TKategoriAdi": "gri"
   },
@@ -17097,14 +16961,6 @@
       "/kurumlar/terorarananlar.pol.tr/Arsiv/671/FotoOrj.jpeg"
     ],
     "IlkGorselURL": "/kurumlar/terorarananlar.pol.tr/Arsiv/671/FotoOrj.jpeg",
-    "TOrgutAdi": "PKK/KCK",
-    "TKategoriAdi": "gri"
-  },
-  {
-    "Adi": "Melek",
-    "Soyadi": "ÇUŞKON",
-    "GorselURL": null,
-    "IlkGorselURL": "/Areas/WebPart/Contents/TArananlar/img/profil-arananlar.png",
     "TOrgutAdi": "PKK/KCK",
     "TKategoriAdi": "gri"
   },
@@ -17319,14 +17175,6 @@
       "/kurumlar/terorarananlar.pol.tr/Arsiv/582/FotoOrj.jpeg"
     ],
     "IlkGorselURL": "/kurumlar/terorarananlar.pol.tr/Arsiv/582/FotoOrj.jpeg",
-    "TOrgutAdi": "PKK/KCK",
-    "TKategoriAdi": "gri"
-  },
-  {
-    "Adi": "Erdal",
-    "Soyadi": "AYAZ",
-    "GorselURL": null,
-    "IlkGorselURL": "/Areas/WebPart/Contents/TArananlar/img/profil-arananlar.png",
     "TOrgutAdi": "PKK/KCK",
     "TKategoriAdi": "gri"
   },
@@ -17663,14 +17511,6 @@
     "TKategoriAdi": "gri"
   },
   {
-    "Adi": "Yılmaz",
-    "Soyadi": "KARAKUŞ",
-    "GorselURL": null,
-    "IlkGorselURL": "/Areas/WebPart/Contents/TArananlar/img/profil-arananlar.png",
-    "TOrgutAdi": "PKK/KCK",
-    "TKategoriAdi": "gri"
-  },
-  {
     "Adi": "Sabahattin",
     "Soyadi": "YAŞAR",
     "GorselURL": [
@@ -17707,14 +17547,6 @@
       "/kurumlar/terorarananlar.pol.tr/Arsiv/1276/FotoOrj.jpeg"
     ],
     "IlkGorselURL": "/kurumlar/terorarananlar.pol.tr/Arsiv/1276/FotoOrj.jpeg",
-    "TOrgutAdi": "PKK/KCK",
-    "TKategoriAdi": "gri"
-  },
-  {
-    "Adi": "Mehmet Selim",
-    "Soyadi": "SAFALI",
-    "GorselURL": null,
-    "IlkGorselURL": "/Areas/WebPart/Contents/TArananlar/img/profil-arananlar.png",
     "TOrgutAdi": "PKK/KCK",
     "TKategoriAdi": "gri"
   },
@@ -17931,14 +17763,6 @@
     "TKategoriAdi": "gri"
   },
   {
-    "Adi": "Fatih",
-    "Soyadi": "İPEKTEN",
-    "GorselURL": null,
-    "IlkGorselURL": "/Areas/WebPart/Contents/TArananlar/img/profil-arananlar.png",
-    "TOrgutAdi": "PKK/KCK",
-    "TKategoriAdi": "gri"
-  },
-  {
     "Adi": "Dilan",
     "Soyadi": "KARADAĞ",
     "GorselURL": [
@@ -17989,14 +17813,6 @@
     "TKategoriAdi": "gri"
   },
   {
-    "Adi": "Semra",
-    "Soyadi": "KALIN",
-    "GorselURL": null,
-    "IlkGorselURL": "/Areas/WebPart/Contents/TArananlar/img/profil-arananlar.png",
-    "TOrgutAdi": "PKK/KCK",
-    "TKategoriAdi": "gri"
-  },
-  {
     "Adi": "Sefa",
     "Soyadi": "ALTÜNAY",
     "GorselURL": [
@@ -18023,14 +17839,6 @@
       "/kurumlar/terorarananlar.pol.tr/Arsiv/711/FotoOrj.jpeg"
     ],
     "IlkGorselURL": "/kurumlar/terorarananlar.pol.tr/Arsiv/711/FotoOrj.jpeg",
-    "TOrgutAdi": "PKK/KCK",
-    "TKategoriAdi": "gri"
-  },
-  {
-    "Adi": "Serhat",
-    "Soyadi": "AVCI",
-    "GorselURL": null,
-    "IlkGorselURL": "/Areas/WebPart/Contents/TArananlar/img/profil-arananlar.png",
     "TOrgutAdi": "PKK/KCK",
     "TKategoriAdi": "gri"
   },
@@ -18286,14 +18094,6 @@
     "TKategoriAdi": "gri"
   },
   {
-    "Adi": "Zerife",
-    "Soyadi": "BATUR",
-    "GorselURL": null,
-    "IlkGorselURL": "/Areas/WebPart/Contents/TArananlar/img/profil-arananlar.png",
-    "TOrgutAdi": "PKK/KCK",
-    "TKategoriAdi": "gri"
-  },
-  {
     "Adi": "Eyüp",
     "Soyadi": "TOĞYILDIZ",
     "GorselURL": [
@@ -18354,14 +18154,6 @@
     "TKategoriAdi": "gri"
   },
   {
-    "Adi": "Mehmet Ali",
-    "Soyadi": "BAYKARA",
-    "GorselURL": null,
-    "IlkGorselURL": "/Areas/WebPart/Contents/TArananlar/img/profil-arananlar.png",
-    "TOrgutAdi": "PKK/KCK",
-    "TKategoriAdi": "gri"
-  },
-  {
     "Adi": "Abuzer",
     "Soyadi": "ARİCA",
     "GorselURL": [
@@ -18369,14 +18161,6 @@
       "/kurumlar/terorarananlar.pol.tr/Arsiv/404/FotoOrj_2.jpeg"
     ],
     "IlkGorselURL": "/kurumlar/terorarananlar.pol.tr/Arsiv/404/FotoOrj_1.jpeg",
-    "TOrgutAdi": "PKK/KCK",
-    "TKategoriAdi": "gri"
-  },
-  {
-    "Adi": "Nurettin",
-    "Soyadi": "GÖZHAN",
-    "GorselURL": null,
-    "IlkGorselURL": "/Areas/WebPart/Contents/TArananlar/img/profil-arananlar.png",
     "TOrgutAdi": "PKK/KCK",
     "TKategoriAdi": "gri"
   },
@@ -18506,14 +18290,6 @@
     "TKategoriAdi": "gri"
   },
   {
-    "Adi": "Handan",
-    "Soyadi": "SAKAR",
-    "GorselURL": null,
-    "IlkGorselURL": "/Areas/WebPart/Contents/TArananlar/img/profil-arananlar.png",
-    "TOrgutAdi": "PKK/KCK",
-    "TKategoriAdi": "gri"
-  },
-  {
     "Adi": "Muhsin",
     "Soyadi": "DÜZENCİ",
     "GorselURL": [
@@ -18540,14 +18316,6 @@
       "/kurumlar/terorarananlar.pol.tr/Arsiv/625/FotoOrj.jpeg"
     ],
     "IlkGorselURL": "/kurumlar/terorarananlar.pol.tr/Arsiv/625/FotoOrj.jpeg",
-    "TOrgutAdi": "PKK/KCK",
-    "TKategoriAdi": "gri"
-  },
-  {
-    "Adi": "Osman",
-    "Soyadi": "DEMİR",
-    "GorselURL": null,
-    "IlkGorselURL": "/Areas/WebPart/Contents/TArananlar/img/profil-arananlar.png",
     "TOrgutAdi": "PKK/KCK",
     "TKategoriAdi": "gri"
   },
@@ -18615,44 +18383,12 @@
     "TKategoriAdi": "gri"
   },
   {
-    "Adi": "Barış",
-    "Soyadi": "SAFALI",
-    "GorselURL": null,
-    "IlkGorselURL": "/Areas/WebPart/Contents/TArananlar/img/profil-arananlar.png",
-    "TOrgutAdi": "PKK/KCK",
-    "TKategoriAdi": "gri"
-  },
-  {
-    "Adi": "Haşim",
-    "Soyadi": "ALTEKİN",
-    "GorselURL": null,
-    "IlkGorselURL": "/Areas/WebPart/Contents/TArananlar/img/profil-arananlar.png",
-    "TOrgutAdi": "PKK/KCK",
-    "TKategoriAdi": "gri"
-  },
-  {
     "Adi": "Fehim",
     "Soyadi": "KELEŞ",
     "GorselURL": [
       "/kurumlar/terorarananlar.pol.tr/Arsiv/638/FotoOrj.jpeg"
     ],
     "IlkGorselURL": "/kurumlar/terorarananlar.pol.tr/Arsiv/638/FotoOrj.jpeg",
-    "TOrgutAdi": "PKK/KCK",
-    "TKategoriAdi": "gri"
-  },
-  {
-    "Adi": "Nadiye",
-    "Soyadi": "KINA",
-    "GorselURL": null,
-    "IlkGorselURL": "/Areas/WebPart/Contents/TArananlar/img/profil-arananlar.png",
-    "TOrgutAdi": "PKK/KCK",
-    "TKategoriAdi": "gri"
-  },
-  {
-    "Adi": "Lokman",
-    "Soyadi": "DARA",
-    "GorselURL": null,
-    "IlkGorselURL": "/Areas/WebPart/Contents/TArananlar/img/profil-arananlar.png",
     "TOrgutAdi": "PKK/KCK",
     "TKategoriAdi": "gri"
   },
@@ -18664,14 +18400,6 @@
       "/kurumlar/terorarananlar.pol.tr/Arsiv/641/FotoOrj_2.jpeg"
     ],
     "IlkGorselURL": "/kurumlar/terorarananlar.pol.tr/Arsiv/641/FotoOrj_1.jpeg",
-    "TOrgutAdi": "PKK/KCK",
-    "TKategoriAdi": "gri"
-  },
-  {
-    "Adi": "Hüseyin",
-    "Soyadi": "ASLAN",
-    "GorselURL": null,
-    "IlkGorselURL": "/Areas/WebPart/Contents/TArananlar/img/profil-arananlar.png",
     "TOrgutAdi": "PKK/KCK",
     "TKategoriAdi": "gri"
   },
@@ -18772,14 +18500,6 @@
       "/kurumlar/terorarananlar.pol.tr/Arsiv/438/FotoOrj.jpeg"
     ],
     "IlkGorselURL": "/kurumlar/terorarananlar.pol.tr/Arsiv/438/FotoOrj.jpeg",
-    "TOrgutAdi": "PKK/KCK",
-    "TKategoriAdi": "gri"
-  },
-  {
-    "Adi": "Menice",
-    "Soyadi": "TURAN",
-    "GorselURL": null,
-    "IlkGorselURL": "/Areas/WebPart/Contents/TArananlar/img/profil-arananlar.png",
     "TOrgutAdi": "PKK/KCK",
     "TKategoriAdi": "gri"
   },
@@ -19719,14 +19439,6 @@
       "/kurumlar/terorarananlar.pol.tr/Arsiv/275/FotoOrj_2.jpeg"
     ],
     "IlkGorselURL": "/kurumlar/terorarananlar.pol.tr/Arsiv/275/FotoOrj_1.jpeg",
-    "TOrgutAdi": "DEAŞ",
-    "TKategoriAdi": "yeşil"
-  },
-  {
-    "Adi": "Kenan",
-    "Soyadi": "KOYUN",
-    "GorselURL": null,
-    "IlkGorselURL": "/Areas/WebPart/Contents/TArananlar/img/profil-arananlar.png",
     "TOrgutAdi": "DEAŞ",
     "TKategoriAdi": "yeşil"
   },
@@ -21346,14 +21058,6 @@
       "/kurumlar/terorarananlar.pol.tr/Arsiv/1459/FotoOrj.jpeg"
     ],
     "IlkGorselURL": "/kurumlar/terorarananlar.pol.tr/Arsiv/1459/FotoOrj.jpeg",
-    "TOrgutAdi": "FETÖ/PDY",
-    "TKategoriAdi": "yeşil"
-  },
-  {
-    "Adi": "Süleyman",
-    "Soyadi": "BAHÇECİ",
-    "GorselURL": null,
-    "IlkGorselURL": "/Areas/WebPart/Contents/TArananlar/img/profil-arananlar.png",
     "TOrgutAdi": "FETÖ/PDY",
     "TKategoriAdi": "yeşil"
   },
