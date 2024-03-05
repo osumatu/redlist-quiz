@@ -220,17 +220,16 @@
 
     } catch (error) {
       console.error('Error fetching data:', error);
-
+      
       return [];
     }
   }
 
   async function fetchCivilianData() {
-    try {
-      const civilianImageUrl = 'https://thispersondoesnotexist.com/';
-      const civilianData = [];
-
+    try {      
+      var civilianData = [];
       for (let i = 0; i < 750; i++) {
+        var civilianImageUrl = `https://thispersondoesnotexist.com/?${Date.now()}`;
         civilianData.push({
           TOrgutAdi: 'Sivil',
           IlkGorselURL: civilianImageUrl
@@ -246,7 +245,7 @@
 
   async function populateQuizData() {
     let terroristData = await fetchTerroristData();
-    let civilianData = [];
+    var civilianData = [];
 
     if (includeCivilians) {
       civilianData = await fetchCivilianData();
@@ -254,14 +253,14 @@
 
     const combinedData = includeCivilians ? [...terroristData, ...civilianData] : terroristData;
     combinedData.sort(() => Math.random() - 0.5);
-
-    return combinedData;
+    
+    return combinedData;    
   }
 
   function toggleIncludeCivilians() {
     includeCivilians = !includeCivilians;
   }
-
+  
   async function displayQuiz() {
     const terroristData = await populateQuizData();
 
@@ -291,7 +290,6 @@
 
     const allAnswers = [correctAnswer, ...incorrectAnswers].sort(() => Math.random() - 0.5);
     const quizContainer = document.getElementById('quiz-container');
-
     quizContainer.innerHTML = `<div class="image-container">
       <img src="${currentTerrorist.IlkGorselURL}" alt="Terrorist Image">
     </div>
