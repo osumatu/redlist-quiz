@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Terorist Quiz</title>
+  <title>Terrorist Quiz</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -93,6 +93,19 @@
     .slider.round:before {
       border-radius: 50%;
     }
+
+    .about {
+      margin-top: 2rem;
+      font-size: 14px;
+    }
+
+    .about summary {
+      cursor: pointer;
+    }
+
+    .about summary:first-of-type {
+      list-style-type: "❓";
+    }
   </style>
 
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -100,19 +113,22 @@
 </head>
 <body>
   <div class="container">
-    <h1>Terorist Quiz</h1>
+    <h1>Terrorist Quiz</h1>
     <div id="quiz-container"></div>
-    <div id="scoreboard" class="scoreboard">Dogru: 0 | Yanlis: 0</div>
+    <div id="scoreboard" class="scoreboard">Doğru: 0 | Yanlış: 0</div>
     <br/>
-    <button id="reset-button">Skoru Sifirla</button>
+    <button id="reset-button">Skoru Sıfırla</button>
     <br/>
-    <div class="container">
-      <h2>Sivilleri Ekle</h2>
-      <label class="switch">
-        <input type="checkbox" id="include-civilians-toggle" onchange="toggleIncludeCivilians()" checked>
-        <span class="slider round"></span>
-      </label>
-    </div>
+    <h2>Sivilleri Ekle</h2>
+    <label class="switch">
+      <input type="checkbox" id="include-civilians-toggle" onchange="toggleIncludeCivilians()" checked>
+      <span class="slider round"></span>
+    </label>
+    <details class="about">
+      <summary>Hakkında</summary>
+      <p>Veriler herkese açık olarak yayınlanan <a href="https://www.terorarananlar.pol.tr/tarananlar/" target="_blank">T.C. İçişleri Bakanlığı Terör Arananlar</a> listesinden alınmaktadır.</p>
+      <p>Sivillerin fotoğrafları yapay zeka ile insan fotoğrafı üreten <a target="_blank" href="https://thispersondoesnotexist.com">https://thispersondoesnotexist.com</a> adresinden alınmaktadır.</p>
+    </details>
   </div>
 <script>
 
@@ -134,7 +150,7 @@
       const response = await fetch('https://raw.githubusercontent.com/osumatu/terorist-quiz/main/data.json');
 
       if (!response.ok) {
-        throw new Error('Failed to fetch data');
+        throw new Error('Hata: Veriler yüklenemedi, lütfen sayfayı yenileyin.');
       }
       const data = await response.json();
       return data.filter((terrorist) => !!terrorist.GorselURL?.length)
@@ -164,7 +180,7 @@
 
       return civilianData;
     } catch (error) {
-      console.error('Error fetching civilian data:', error);
+      console.error('Hata: Sivil verileri alınamadı:', error);
       return [];
     }
   }
@@ -191,7 +207,7 @@
     const terroristData = await populateQuizData();
 
     if (terroristData.length === 0) {
-      alert('Failed to fetch data. Please try again later.');
+      alert('Hata: Veriler yüklenemedi. Lütfen sayfayı yenileyin.');
 
       return;
     }
@@ -220,7 +236,7 @@
     quizContainer.innerHTML = `<div class="image-container">
       <img src="${currentTerrorist.IlkGorselURL}" alt="Terrorist Image">
     </div>
-    <p>Hangi orgut?</p>
+    <p>Hangi örgüt?</p>
     ${allAnswers.map(answer => `<button class="answer-button" onclick="checkAnswer('${correctAnswer}', '${answer}')">${answer}</button>`).join('')}
     `;
   }
@@ -234,21 +250,21 @@
       let title = '';
 
       if (successRate >= 80) {
-        title = 'MIT goreve cagiriyor!';
+        title = 'MIT göreve çağırıyor!';
       } else if (successRate >= 60) {
-        title = 'Yuru be babus!';
+        title = 'Yürü be babuş!';
       } else if (successRate >= 40) {
         title = 'Ha gayret.';
       } else {
-        title = 'Hocam goz var izan var ya.';
+        title = 'Hocam göz var izan var ya.';
       }
 
       Swal.fire({
         title: title,
-        text: `%${successRate} oranla dogru bildin. Devam mi bastan mi?`,
+        text: `%${successRate} oranla doğru bildin. Devam mı baştan mı?`,
         showCancelButton: true,
         confirmButtonText: 'Devam',
-        cancelButtonText: 'Bastan',
+        cancelButtonText: 'Baştan',
         icon: 'info'
       }).then((result) => {
         if (result.isConfirmed) {
@@ -283,7 +299,7 @@
     } else {
       Swal.fire({
         icon: 'error',
-        text: `Maalesef. ${correctAnswer} olacakti.`,
+        text: `Maalesef. ${correctAnswer} olacaktı.`,
         confirmButtonText: 'Devam',
       }).then((result) => {
         if (result.isConfirmed) {
@@ -297,7 +313,7 @@
 
   function updateScoreboard() {
     const scoreboard = document.getElementById('scoreboard');
-    scoreboard.textContent = `Dogru: ${correctScore} | Yanlis: ${incorrectScore}`;
+    scoreboard.textContent = `Doğru: ${correctScore} | Yanlış: ${incorrectScore}`;
 
     localStorage.setItem('correctScore', correctScore);
     localStorage.setItem('incorrectScore', incorrectScore);
