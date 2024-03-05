@@ -94,37 +94,17 @@
       border-radius: 50%;
     }
 
-    .tooltip {
-      position: relative;
-      display: inline-block;
+    .about {
+      margin-top: 2rem;
+      font-size: 14px;
     }
 
-    .tooltip .tooltiptext {
-      visibility: hidden;
-      width: 500px;
-      background-color: black;
-      color: white;
-      text-align: center;
-      border-radius: 6px;
-      padding: 5px;
-      position: absolute;
-      z-index: 1;
-      top: 150%;
-      left: 50%;
-      margin-left: -60px;
+    .about summary {
+      cursor: pointer;
     }
 
-    .tooltip:hover .tooltiptext {
-      visibility: visible;
-    }
-
-    .tooltip:hover .tooltiptext {
-      visibility: visible;
-    }
-
-    .tooltip .tooltiptext a {
-      color: white;
-      text-decoration: underline;
+    .about summary:first-of-type {
+      list-style-type: "❓";
     }
   </style>
 
@@ -133,28 +113,22 @@
 </head>
 <body>
   <div class="container">
-    <div style="display: flex; align-items: center; justify-content: center;">
-      <h1 style="padding-right: 10px;">Terrorist Quiz</h1>
-      <div class="tooltip">
-        <img width="30px" height="30px" src="mark.png" alt="Bilgilendirme" class="icon">
-        <span class="tooltiptext">
-          Veriler herkese açık olarak yayınlanan <a href="https://www.terorarananlar.pol.tr/tarananlar/" target="_blank">T.C. İçişleri Bakanlığı Terör Arananlar</a> listesinden alınmaktadır. 
-          Sivillerin fotoğrafları yapay zeka ile insan fotoğrafı üreten <a target="_blank" href="https://thispersondoesnotexist.com">https://thispersondoesnotexist.com</a> adresinden alınmaktadır.
-        </span>
-      </div>
-    </div>
+    <h1>Terrorist Quiz</h1>
     <div id="quiz-container"></div>
     <div id="scoreboard" class="scoreboard">Doğru: 0 | Yanlış: 0</div>
     <br/>
     <button id="reset-button">Skoru Sıfırla</button>
     <br/>
-    <div class="container">
-      <h2>Sivilleri Ekle</h2>
-      <label class="switch">
-        <input type="checkbox" id="include-civilians-toggle" onchange="toggleIncludeCivilians()" checked>
-        <span class="slider round"></span>
-      </label>
-    </div>
+    <h2>Sivilleri Ekle</h2>
+    <label class="switch">
+      <input type="checkbox" id="include-civilians-toggle" onchange="toggleIncludeCivilians()" checked>
+      <span class="slider round"></span>
+    </label>
+    <details class="about">
+      <summary>Hakkında</summary>
+      <p>Veriler herkese açık olarak yayınlanan <a href="https://www.terorarananlar.pol.tr/tarananlar/" target="_blank">T.C. İçişleri Bakanlığı Terör Arananlar</a> listesinden alınmaktadır.</p>
+      <p>Sivillerin fotoğrafları yapay zeka ile insan fotoğrafı üreten <a target="_blank" href="https://thispersondoesnotexist.com">https://thispersondoesnotexist.com</a> adresinden alınmaktadır.</p>
+    </details>
   </div>
 <script>
 
