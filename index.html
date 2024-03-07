@@ -168,10 +168,10 @@
 
   async function fetchCivilianData() {
     try {
-      const civilianImageUrl = 'https://thispersondoesnotexist.com/';
       const civilianData = [];
-
       for (let i = 0; i < 750; i++) {
+        const timestamp = new Date().getTime();
+        const civilianImageUrl = `https://thispersondoesnotexist.com/?timestamp=${timestamp}`;
         civilianData.push({
           TOrgutAdi: 'Sivil',
           IlkGorselURL: civilianImageUrl
