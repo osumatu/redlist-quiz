@@ -1,2 +1,2 @@
-# terorist-quiz
-teroristini dogru tani turkiye
+# redlist-quiz
+arananlarini dogru tani turkiye
